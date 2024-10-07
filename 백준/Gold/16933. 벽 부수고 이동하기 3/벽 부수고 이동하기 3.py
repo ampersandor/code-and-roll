@@ -1,33 +1,36 @@
 from sys import stdin
 from collections import deque
 
-
 input = stdin.readline
-n, m, k = map(int, input().split())
-delta = (0, 1, 0, -1, 0)
 INF = float('inf')
-grid = [list(input().strip()) for _ in range(n)]
-visited = [[[INF for ___ in range(k+1)] for __ in range(m)] for _ in range(n)]
-visited[0][0][0] = 1
+delta = (0, 1, 0, -1, 0)
+
+n, m, k = map(int, input().split())
+board = [input().strip() for _ in range(n)]
+visited = [[INF for _ in range(m)] for _ in range(n)]
+visited[0][0] = 0
+
+count = 1
+
+que = deque([(0, 0, 0, 1, True)])  # x, y, break
 
 
-que = deque([(0, 0, 1, 0, 1)]) # x, y, c, b, day
 while que:
-    x, y, c, b, day = que.popleft()
-
+    x, y, b, c, day = que.popleft()
+    if x == n - 1 and y == m - 1:
+        print(c)
+        exit(0)
     for d in range(4):
         nx, ny = x + delta[d], y + delta[d+1]
-        if 0 <= nx < n and 0 <= ny < m:
-            if grid[nx][ny] == "1" and b < k and visited[nx][ny][b+1] == INF:
-                if day == 1:
-                    que.append((nx, ny, c + 1, b + 1, day * -1))
-                    visited[nx][ny][b+1] = c + 1
+        if 0 <= nx < n and 0 <= ny < m and b < visited[nx][ny]:
+            if board[nx][ny] == '0':
+                que.append((nx, ny, b, c + 1, not day))
+                visited[nx][ny] = b
+            elif b < k:
+                if not day:
+                    que.append((x, y, b, c + 1, not day))
                 else:
-                    que.append((x, y, c + 1, b, day * -1))
-            elif grid[nx][ny] == "0" and visited[nx][ny][b] == INF:
-                que.append((nx, ny, c + 1, b, day * -1))
-                visited[nx][ny][b] = c + 1
+                    visited[nx][ny] = b
+                    que.append((nx, ny, b + 1, c + 1, not day))
 
-res = min(visited[-1][-1])
-
-print(res if res != float('inf') else -1)
+print(-1)
