@@ -22,14 +22,13 @@ def dfs(node, parent):
 res = dfs(0, 0)
 
 children = []
-def dfs2(node, parent, took):
-    if took or dp[node][0] > dp[node][1]:
+def dfs2(node, parent, taken):
+    if taken or dp[node][0] > dp[node][1]:
         for child in graph[node]:
             if child != parent:
                 dfs2(child, node, False)
-    else:
-        if dp[node][0] <= dp[node][1]:
-            children.append(node + 1)
+    else:  # not taken and dp[node][1] is bigger or equal
+        children.append(node + 1)
         for child in graph[node]:
             if child != parent:
                 dfs2(child, node, True)
