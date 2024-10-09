@@ -1,7 +1,7 @@
 from sys import stdin, setrecursionlimit
 from collections import defaultdict
 input = stdin.readline
-setrecursionlimit(10**7)
+setrecursionlimit(10**5)
 n = int(input())
 graph = defaultdict(list)
 weights = list(map(int, input().split()))
