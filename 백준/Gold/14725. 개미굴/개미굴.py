@@ -2,10 +2,24 @@ import sys
 input = sys.stdin.readline
 
 
-class Node():
+class Node:
     def __init__(self, key):
         self.key = key
         self.children = {}
+
+    def has_child(self, key):
+        return key in self.children
+
+    def add_child(self, key):
+        self.children[key] = (node:=Node(key))
+
+        return node
+
+    def update_child(self, key):
+        if self.has_child(key):
+            return self.children[key]
+
+        return self.add_child(key)
 
 
 class Trie:
@@ -13,31 +27,20 @@ class Trie:
         self.head = Node(None)
 
     def insert(self, strings):
-        current_node = self.head
-
+        cur = self.head
         for string in strings:
-            # 없다면 생성
-            if string not in current_node.children:
-                current_node.children[string] = Node(string)
+            cur = cur.update_child(string)
 
-            current_node = current_node.children[string]
-
-    def dfs(self, current_node, depth):
-        for k, v in sorted(current_node.children.items()):
-
-            for _ in range(depth):
-                print("--", end="")
-            print(k)
-
+    def dfs(self, cur, depth):
+        for k, v in sorted(cur.children.items()):
+            print("--" * depth + k)
             self.dfs(v, depth + 1)
 
 
 if __name__ == '__main__':
     N = int(input())
-
     trie = Trie()
     for _ in range(N):
-        cur_input = list(map(str, input().split()))
-        trie.insert(cur_input[1:])
+        trie.insert(list(map(str, input().split()))[1:])
 
     trie.dfs(trie.head, 0)

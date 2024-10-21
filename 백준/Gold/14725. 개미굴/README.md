@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 111544 KB, 시간: 128 ms
+메모리: 111052 KB, 시간: 112 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2024년 10월 21일 23:05:23
+2024년 10월 21일 23:17:50
 
 ### 문제 설명
 
@@ -30,7 +30,7 @@
 
 <p dir="ltr">이 신호로 로봇 개미는 개미굴 각 층을 따라 내려오면서 알게 된 각 방에 저장된 먹이 정보를 윤수한테 알려줄 수 있다.</p>
 
-<p dir="ltr" style="text-align: center;"><img alt="" src="" style="height:392px; width:751px"></p>
+<p dir="ltr" style="text-align: center;"><img alt="" src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/problem/14725/1.png" style="height:392px; width:751px"></p>
 
 <p dir="ltr">로봇 개미 개발을 완료한 윤수는 개미굴 탐사를 앞두고 로봇 개미를 테스트 해보기 위해 위 그림의 개미굴에 로봇 개미를 투입했다. 로봇 개미의 수는 각 개미굴의 저장소를 모두 확인할 수 있을 만큼 넣는다.</p>
 
