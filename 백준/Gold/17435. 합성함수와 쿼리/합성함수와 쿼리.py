@@ -1,20 +1,29 @@
-import sys
-input = sys.stdin.readline
+import sys 
+input = sys.stdin.readline 
 
-log = 18
-M = int(input())
-f = [0]+list(map(int,input().split()))
-dp = [[f[i]] for i in range(M+1)]
+m = int(input()) 
+arr = list(map(int, input().split())) 
 
-for j in range(1, log + 1):
-    for i in range(1, M + 1):
-        dp[i].append(dp[dp[i][j-1]][j-1])
+k = (5 * (10 ** 5)).bit_length()
 
-Q = int(input())
-for _ in range(Q):
-    n,x = map(int, input().split())
-    for b in range(log, -1, -1):
-        if n >= 1 << b:
-            n -= 1<<b
-            x = dp[x][b]
-    print(x)
+sparse = [[0] * (m + 1) for _ in range(k)] 
+# sparse[i][j] = f에 "j를 2 ** i번 대입한 값" 
+
+for i in range(1, m + 1): 
+    sparse[0][i] = arr[i - 1] 
+
+for i in range(1, k): 
+    for j in range(1, m + 1):
+        sparse[i][j] = sparse[i - 1][sparse[i - 1][j]] 
+
+Q = int(input()) 
+for _ in range(Q): 
+    n, x = map(int, input().split(' ')) 
+
+    i = k - 1 
+    while n: 
+        while 2 ** i > n: 
+            i -= 1 
+        x = sparse[i][x] 
+        n -= 2 ** i 
+    print(x) 
