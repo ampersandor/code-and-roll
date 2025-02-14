@@ -1,29 +1,33 @@
-from sys import stdin
+from sys import stdin, stdout
 
-class MSet(set):
+class MSet(list):
     def __init__(self):
-        super().__init__()
+        super().__init__([False for _ in range(21)])
 
-    def custom(self, value, num: int=None):
+    def custom(self, value, num: str=None):
+        if num:
+            num = int(num)
         if value == "add":
-            self.add(num)
+            self[num] = True
         elif value == "remove":
-            self.discard(num)
+            self[num] = False
         elif value == "check":
-            print(1 if num in self else 0)
+            write('1\n' if self[num] else '0\n')
         elif value == "toggle":
-            self.add(num) if num not in self else self.remove(num)
+            self[num] ^= True
         elif value == "all":
-            self.clear()
-            self.update({str(i) for i in range(1, 21)})
+            for i in range(1, 21):
+                self[i] = True
         elif value == "empty":
-            self.clear()
+            for i in range(1, 21):
+                self[i] = False
 
 
-input = stdin.readline
+read = stdin.readline
+write = stdout.write
 
-n = int(input())
+n = int(read())
 mset = MSet()
 
 for _ in range(n):
-    mset.custom(*input().split())
+    mset.custom(*read().split())
