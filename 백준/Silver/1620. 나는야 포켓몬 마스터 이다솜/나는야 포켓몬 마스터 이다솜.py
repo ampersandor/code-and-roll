@@ -1,15 +1,21 @@
-n, m = map(int, input().split())
+from sys import stdin, stdout
+
+read = stdin.readline
+write = stdout.write
+
+n, m = map(int, read().strip().split())
 
 monsters = []
-indices = dict()
+indices = [dict() for _ in range(21)]
+
 
 for i in range(1, n+1):
-    monsters.append(monster:=input())
-    indices[monster] = i
+    monsters.append(monster:=read().strip())
+    indices[len(monster)][monster] = str(i)
 
 for _ in range(m):
-    query = input()
+    query = read().strip()
     if query.isnumeric():
-        print(monsters[int(query)-1])
+        write(monsters[int(query)-1] + "\n")
     else:
-        print(indices[query])
+        write(indices[len(query)][query] + "\n")
