@@ -1,3 +1,4 @@
+from collections import Counter
 
 INF = float('inf')
 n, m, b = map(int, input().split())
@@ -5,15 +6,16 @@ lands = []
 for _ in range(n):
     lands += list(map(int, input().split()))
 
+lands = Counter(lands)
 min_h, max_h = min(lands), max(lands)
 
 def calc(height):
     dig, pour = 0, 0
     for land in lands:
         if land > height:
-            dig += (land - height)
+            dig += (land - height) * lands[land]
         elif land < height:
-            pour += (height - land)
+            pour += (height - land) * lands[land]
     if pour > dig + b:
         return INF
 
