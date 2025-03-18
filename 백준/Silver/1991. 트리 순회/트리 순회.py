@@ -1,12 +1,12 @@
 from collections import namedtuple
 
-Node = namedtuple("Node", ["name", "left", "right"])
+Node = namedtuple("Node", ["left", "right"])
 
 n = int(input())
 tree = dict()
 for _ in range(n):
     node, left, right = input().strip().split()
-    tree[node] = Node(node, left, right)
+    tree[node] = Node(left, right)
 
 in_ = []
 pre = []
