@@ -28,10 +28,9 @@ def express(arr, l, r, rev):
 for _ in range(T):
     p = read().strip()
     n = int(read())
-    arr = eval(read().strip())
+    arr = read().strip()[1:-1].split(",")
     l, r, rev = compress(p, n)
     if l > r:
         write("error\n")
     else:
         write(f"[{','.join(express(arr, l, r, rev))}]\n")
- 
