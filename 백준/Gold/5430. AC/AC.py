@@ -16,11 +16,15 @@ def compress(ops, r_idx):
 
     return l, r, rev
 
+def reverse(arr):
+    for i in range(len(arr)-1, -1, -1):
+        yield arr[i]
+
 def my_print(l, r, rev, arr):
     if l > r:
         write("error\n")
     else:
-        write(f"[{','.join(map(str, arr[l:r][::-1] if rev else arr[l:r]))}]\n")
+        write(f"[{','.join(map(str, reverse(arr[l:r]) if rev else arr[l:r]))}]\n")
 
 
 for _ in range(T):
