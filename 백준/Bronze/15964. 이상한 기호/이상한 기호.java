@@ -5,15 +5,15 @@ import java.util.StringTokenizer;
 
 
 public class Main {
-    public static int func(int a, int b){
+    public static long func(long a, long b){
         return (a + b) * (a - b);
     }
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        long n = Long.parseLong(st.nextToken());
+        long m = Long.parseLong(st.nextToken());
 
         System.out.println(func(n, m));
 
