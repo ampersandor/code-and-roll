@@ -1,13 +1,13 @@
 import java.io.*;
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int n = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
         int[] towers = new int[n];
@@ -16,17 +16,16 @@ public class Main {
         Deque<Integer> stack = new ArrayDeque<>();
         for (int i = n-1; i >= 0; i--){
             while (!stack.isEmpty() && towers[stack.peek()] < towers[i]){
-                int idx = stack.pop();
-                res[idx] = i+1;
+                res[stack.pop()] = i+1;
             }
             stack.push(i);
         }
 
         for (int i = 0; i < n - 1; i ++){
-            System.out.print(res[i] + " ");
+            bw.write(res[i] + " ");
         }
-        System.out.print(res[res.length - 1]);
-
+        bw.write(res[res.length - 1] + "");
+        bw.flush();
 
 
     }
