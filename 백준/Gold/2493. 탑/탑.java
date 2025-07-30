@@ -19,11 +19,14 @@ public class Main {
             }
             stack[ptr++] = i;
         }
+        
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < n - 1; i ++){
-            bw.write(res[i] + " ");
+            sb.append(res[i]).append(" ");
         }
-        bw.write(res[res.length - 1] + "");
+        sb.append(res[res.length - 1]);
+        bw.write(sb.toString());
         bw.flush();
 
 
