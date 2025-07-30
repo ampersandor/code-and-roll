@@ -1,6 +1,4 @@
 import java.io.*;
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -12,13 +10,14 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int[] towers = new int[n];
         int[] res = new int[n];
+        int[] stack = new int[n];
+        int ptr = 0;
         for (int i = 0; i < n; i++) towers[i] = Integer.parseInt(st.nextToken());
-        Deque<Integer> stack = new ArrayDeque<>();
         for (int i = n-1; i >= 0; i--){
-            while (!stack.isEmpty() && towers[stack.peek()] < towers[i]){
-                res[stack.pop()] = i+1;
+            while (ptr > 0 && towers[stack[ptr - 1]] < towers[i]){
+                res[stack[--ptr]] = i+1;
             }
-            stack.push(i);
+            stack[ptr++] = i;
         }
 
         for (int i = 0; i < n - 1; i ++){
