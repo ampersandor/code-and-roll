@@ -10,18 +10,17 @@ public class Main {
     static List<Integer> cur;
     static Set<String> res;
 
-    public static void combination() throws IOException{
+    public static void permutation() throws IOException{
         if (cur.size() == k) {
-            String comb = cur.stream().map(String::valueOf).collect(Collectors.joining(" "));
-            if (!res.contains(comb)) {
-                res.add(comb);
-                bw.write(comb + "\n");
-            }
+            bw.write(cur.stream().map(String::valueOf).collect(Collectors.joining(" ")) + "\n");
             return;
         }
+        int dup = -1;
         for (int i = 0; i < n; i++){
+            if (dup == arr[i]) continue;
+            dup = arr[i];
             cur.add(arr[i]);
-            combination();
+            permutation();
             cur.remove(cur.size() - 1);
         }
 
@@ -39,7 +38,7 @@ public class Main {
         arr = new int[n];
         for (int i = 0; i < n; i++) arr[i] = Integer.parseInt(st.nextToken());
         Arrays.sort(arr);
-        combination();
+        permutation();
         bw.flush();
     }
 }
